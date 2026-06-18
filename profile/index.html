@@ -472,13 +472,12 @@ function continueToEvaluate(){
 }
 
 /* ════ FIELDIQ AI AGENT ════ */
-/* Agent-productivity prompts — things a rep would ask their own copilot
-   to plan the day, prep for the next visit, or chase pending follow-ups. */
+/* Agent-productivity prompts — sales, compliance, RCPA gaps, target history. */
 const FIQ_SUGGESTIONS=[
-  "Who should I prioritise visiting this week?",
-  "Prep me for my next visit",
-  "Which doctors am I yet to cover this month?",
-  "What's pending follow-up from my last visits?",
+  "What was my total primary sales last month, and did I hit my target?",
+  "What is my visit compliance and average visits per day for the last month?",
+  "Which of my doctors have the largest gap between prescription potential and actual RCPA — where am I leaving money on the table?",
+  "Which months in the past year did I miss my primary sales target, and for which brands?",
 ];
 let __fiqHistory=[];
 function openFieldIQ(){
@@ -528,15 +527,29 @@ function sendFIQ(preset){
 }
 function mockFIQReply(q){
   const lc=q.toLowerCase();
-  if(lc.includes('priorit')||lc.includes('who should')||lc.includes('focus')) return "Based on tier, recency and pending follow-ups, prioritise these this week:<br><strong>1.</strong> Dr. Padmavathi K-R — Phase-III deck still pending<br><strong>2.</strong> Dr. Rajesh Kumar — last seen 3 days ago, due a touch<br><strong>3.</strong> Dr. Rohan Bhat — Herceptin formulary review live<br>Want me to slot them into tomorrow's plan?";
-  if(lc.includes('prep')||lc.includes('next visit')||lc.includes('briefing')) return "Your next visit is <strong>Dr. Vikram Nair · 02:14 PM · Apollo Koramangala</strong>. Key prep:<br>• He flagged a dosage query — bring the prescribing label v2.1<br>• Share the Lancet RWE paper (matches his preferred format)<br>• Avoid price-only pitch — he's price-sensitive but science-first<br>Need me to pull the brochure into the visit card?";
-  if(lc.includes('yet to')||lc.includes('not visited')||lc.includes('cover')||lc.includes('uncovered')) return "Doctors you haven't visited in June (out of your 28 mapped):<br>• Dr. Pal · Surgical Oncology · HCG<br>• Dr. K. P. · Interventional Cardio · Sakra<br>• Dr. Aanya · Dermatology · Skin &amp; Hair Clinic<br>• Dr. Joshi · General Medicine · PHC<br>• Dr. M. R. C. Pillai · Pulmonology · Narayana HC<br>• Dr. Anjuli S-K · Psychiatry · MindCare<br>Want me to add the top-tier ones to next week's plan?";
-  if(lc.includes('pending')||lc.includes('follow')||lc.includes('open task')||lc.includes('overdue')) return "You have <strong>4 follow-ups</strong> still open from recent visits:<br>• Share Phase-III oncology data → <strong>Dr. Rajesh Kumar</strong> (due today)<br>• Drop sample, new formulation → <strong>Dr. Padmavathi K-R</strong> (due today)<br>• Re-share clinical evidence pack → <strong>Dr. Arjun Reddy</strong> (due 16 Jun)<br>• Referral discussion at HCG → <strong>Dr. Sneha Rao</strong> (overdue · 15 Jun)<br>Tap any to open the task.";
-  if(lc.includes('best time')||lc.includes('when to')||lc.includes('availab')) return "From past engagement data, the highest-success windows are:<br>• Dr. Padmavathi K-R · <strong>Tue & Thu, 10 AM – 1 PM</strong><br>• Dr. Vikram Nair · <strong>Tue & Thu, 11 AM – 1 PM</strong><br>• Dr. Sneha Rao · <strong>Mon & Wed, 3 PM – 6 PM</strong><br>Avoid Mondays before 11 AM — clinic OPDs run heavy.";
-  if(lc.includes('route')||lc.includes('travel')||lc.includes('shortest')) return "Tomorrow's plan covers 5 visits across <strong>~42 km</strong>. Re-optimising for shortest route saves ~14 km (~38 min). Want me to apply it?";
-  if(lc.includes('script')||lc.includes('talking')||lc.includes('pitch')||lc.includes('detail')) return "Suggested talking points for your next visit (Dr. Vikram Nair · Endocrinology):<br>• Open with the prescription-outcome summary he asked for last time<br>• Walk through the v2.1 prescribing label — address the dosage-range query head-on<br>• Pivot to the Lancet RWE paper (he prefers data-led conversations)<br>• Close with a soft ask: would he consider one complex diabetic case for protocol trial?";
-  if(lc.includes('target')||lc.includes('how am i')||lc.includes('my perf')||lc.includes('conversion')) return "Your month-to-date snapshot:<br>• Visits completed: <strong>18 / 24</strong> (75%)<br>• Conversion rate: <strong>62%</strong> · ahead of regional avg (58%)<br>• Top-performing brand this month: <strong>Herceptin</strong><br>You're on track to clear 90% of target by the 25th.";
-  return "I can help you plan your day, prep for visits, surface pending follow-ups, or find the right talking points for a specific doctor. Try one of the chips below — or ask me anything specific to a doctor, brand, or task.";
+
+  /* 1. Primary sales last month + target */
+  if(lc.includes('primary sales')||(lc.includes('hit')&&lc.includes('target'))){
+    return "Primary sales — <strong>May 2026</strong>:<br>• Achieved: <strong>₹48.6 L</strong><br>• Target: ₹52.0 L<br>• Attainment: <strong>93.5%</strong> · <span style=\"color:#DD8A2A;font-weight:700;\">missed by ₹3.4 L</span><br><br>Brand-wise gap:<br>• <strong>Herceptin</strong> — ₹19.2 L vs ₹19.0 L · <span style=\"color:#2FA56C;font-weight:700;\">+1%</span><br>• <strong>Avastin</strong> — ₹14.8 L vs ₹16.0 L · −7.5%<br>• <strong>Tecentriq</strong> — ₹8.1 L vs ₹10.0 L · <span style=\"color:#EF4A45;font-weight:700;\">−19%</span><br>• <strong>MabThera</strong> — ₹6.5 L vs ₹7.0 L · −7%<br>Tecentriq is the main drag — want me to surface the top 3 prescribers to recover?";
+  }
+
+  /* 2. Visit compliance + avg visits/day */
+  if(lc.includes('compliance')||(lc.includes('average')&&lc.includes('visits'))||(lc.includes('visits per day'))){
+    return "Last 30 days · visit metrics:<br>• <strong>VF compliance:</strong> 84% (target 80%) · <span style=\"color:#2FA56C;font-weight:700;\">on track</span><br>• <strong>Avg visits/day:</strong> 5.7 (target 6.0) · slightly under<br>• Total completed calls: 142<br>• Doctor coverage: 79% (22/28)<br><br>Where compliance dropped:<br>• <strong>P3 tier</strong> — only 50% covered (3/6) — pulled the overall avg down<br>• <strong>Tue 27 May & Thu 5 Jun</strong> — only 2 visits each (admin/CME days)<br>Lift suggestion: book one extra P3 call next Wed to bring avg to 6.0/day.";
+  }
+
+  /* 3. Prescription potential vs RCPA gap */
+  if(lc.includes('rcpa')||lc.includes('potential')||lc.includes('leaving money')||lc.includes('gap')){
+    return "Top 5 doctors with the largest <strong>Rx potential vs RCPA gap</strong>:<br>1. <strong>Dr. Padmavathi K-R</strong> · Nephrology · gap <strong>₹4.2 L</strong> (potential ₹6.8 L, actual ₹2.6 L) — Tecentriq under-prescribed<br>2. <strong>Dr. Rohan Bhat</strong> · Oncology · gap <strong>₹3.6 L</strong> — Herceptin steady, Kadcyla untouched<br>3. <strong>Dr. Rajesh Kumar</strong> · Oncology · gap <strong>₹2.9 L</strong> — Avastin trending down, competitor share rising<br>4. <strong>Dr. Sneha Rao</strong> · Oncology · gap <strong>₹2.1 L</strong> — strong on MabThera, weak on Perjeta<br>5. <strong>Dr. Mallika</strong> · CTVS · gap <strong>₹1.4 L</strong> — RoActemra missed despite high-volume practice<br><br>Combined recoverable opportunity: <strong>~₹14.2 L</strong>. Want me to draft a brand-wise pitch for #1?";
+  }
+
+  /* 4. Missed-target months past year, by brand */
+  if(lc.includes('past year')||lc.includes('last year')||lc.includes('12 month')||lc.includes('miss')||lc.includes('which month')){
+    return "Months you missed your primary sales target — <strong>Jun '25 to May '26</strong>:<br><br>• <strong>Jul '25</strong> — 88% · brands: <strong>Tecentriq, Esbriet</strong><br>• <strong>Sep '25</strong> — 91% · brands: <strong>Avastin, Tarceva</strong><br>• <strong>Dec '25</strong> — 86% · brands: <strong>Herceptin</strong> (festive lull), <strong>Tecentriq</strong><br>• <strong>Feb '26</strong> — 94% · brands: <strong>MabThera</strong><br>• <strong>May '26</strong> — 93.5% · brands: <strong>Tecentriq, Avastin</strong><br><br><strong>Tecentriq</strong> is the recurring miss (4 of 5 months). Want me to pull the prescribing trend &amp; the doctors who slowed down?";
+  }
+
+  /* Fallback */
+  return "I can pull data on your sales, visit compliance, doctor potential vs RCPA, target history, or anything specific to a doctor or brand. Try one of the chips below — or ask me directly.";
 }
 
 /* ════ LOGOUT ════ */

@@ -19,34 +19,27 @@
             <div class="dash-greet">Good morning, Raj</div>
             <div class="dash-greet-sub">Tue, 16 Jun 2026</div>
           </div>
-          <div style="display:flex;gap:10px;align-items:center;">
-            <span class="daterange" onclick="openSheet('dp')" style="padding:6px 11px;font-size:12.5px;">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
-              <span id="range-label">Today</span>
-              <svg class="chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-            </span>
-            <div class="avatar" onclick="location.href='/profile'">RH</div>
-          </div>
+          <div class="avatar" onclick="location.href='/profile'">RH</div>
         </div>
       </div>
       <div class="screen"><div style="padding:14px 18px 32px;">
 
-        <!-- ① Focal — the single most pressing thing right now -->
+        <!-- Active visit -->
         <a class="dash-focal" href="/beat-plan/vikram-nair">
           <div class="dash-focal-body">
             <div class="dash-focal-status">
               <span class="dash-focal-pulse"></span>
-              Waiting · 7m
+              Active · 7m wait
             </div>
             <div class="dash-focal-name">Dr. Vikram Nair</div>
-            <div class="dash-focal-meta">Apollo Koramangala · 02:00 PM</div>
+            <div class="dash-focal-meta">Apollo Koramangala · 02:14 PM</div>
           </div>
           <span class="dash-focal-go">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
           </span>
         </a>
 
-        <!-- ② Today's plan progress -->
+        <!-- Today's plan progress -->
         <div class="dash-progress">
           <div class="dash-progress-h">
             <span class="dash-progress-title">Today's plan</span>
@@ -69,7 +62,85 @@
           </div>
         </div>
 
-        <!-- ③ Action needed -->
+        <!-- Performance · last 30 days -->
+        <div class="dash-section-h">
+          <span class="dash-section-h-t">Performance</span>
+          <span class="dash-section-h-s">Last 30 days · 18 May – 16 Jun</span>
+        </div>
+
+        <!-- Hero KPI pair -->
+        <div class="kpi-pair">
+          <div class="kpi-tile">
+            <div class="kpi-tile-l">Total completed calls</div>
+            <div class="kpi-tile-v">142</div>
+            <div class="kpi-tile-foot">
+              <span class="kpi-trend up">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l5-5 4 4 5-5"/><path d="M16 7h5v5"/></svg>
+                +12 vs prev. 30d
+              </span>
+            </div>
+          </div>
+          <div class="kpi-tile">
+            <div class="kpi-tile-l">Daily call average</div>
+            <div class="kpi-tile-v">5.7<span class="kpi-tile-u">/day</span></div>
+            <div class="kpi-tile-foot">
+              <span class="kpi-trend below">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                Target 6.0/day
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Doctor coverage with tier breakdown -->
+        <div class="kpi-card">
+          <div class="kpi-card-h">
+            <div>
+              <div class="kpi-card-l">Doctor coverage</div>
+              <div class="kpi-card-s">22 of 28 mapped doctors visited</div>
+            </div>
+            <div class="kpi-card-big">79<span class="kpi-card-big-u">%</span></div>
+          </div>
+          <div class="kpi-bar-track"><span style="width:79%;background:var(--teal);"></span></div>
+          <div class="kpi-tier-grid">
+            <div class="kpi-tier">
+              <div class="kpi-tier-head"><span class="kpi-tier-tag tier1">P1</span><span class="kpi-tier-pct">92%</span></div>
+              <div class="kpi-tier-bar"><span style="width:92%;background:var(--teal-press);"></span></div>
+              <div class="kpi-tier-frac">11 / 12</div>
+            </div>
+            <div class="kpi-tier">
+              <div class="kpi-tier-head"><span class="kpi-tier-tag tier2">P2</span><span class="kpi-tier-pct">80%</span></div>
+              <div class="kpi-tier-bar"><span style="width:80%;background:var(--amber);"></span></div>
+              <div class="kpi-tier-frac">8 / 10</div>
+            </div>
+            <div class="kpi-tier">
+              <div class="kpi-tier-head"><span class="kpi-tier-tag tier3">P3</span><span class="kpi-tier-pct">50%</span></div>
+              <div class="kpi-tier-bar"><span style="width:50%;background:var(--ink-3);"></span></div>
+              <div class="kpi-tier-frac">3 / 6</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VF Compliance -->
+        <div class="kpi-card">
+          <div class="kpi-card-h">
+            <div>
+              <div class="kpi-card-l">VF compliance</div>
+              <div class="kpi-card-s">Visit-frequency adherence vs cycle plan</div>
+            </div>
+            <div class="kpi-card-big kpi-card-big-ok">84<span class="kpi-card-big-u">%</span></div>
+          </div>
+          <div class="kpi-bar-track has-target">
+            <span style="width:84%;background:var(--green);"></span>
+            <i class="kpi-bar-target" style="left:80%;" title="Target 80%"></i>
+          </div>
+          <div class="kpi-bar-legend">
+            <span>Actual <strong>84%</strong></span>
+            <span>Target 80%</span>
+          </div>
+        </div>
+
+        <!-- Action needed -->
         <div class="dash-mh">
           <span class="dash-mh-h">Action needed</span>
           <a class="dash-mh-l" href="/tasks">View all</a>
@@ -86,85 +157,13 @@
             <span class="dash-action-ic">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
             </span>
-            <span class="dash-action-t">Reschedule Dr. Anjali — missed at 11:30 AM</span>
+            <span class="dash-action-t">Reschedule Dr. Anjali — missed at 11:42 AM</span>
             <svg class="dash-action-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg>
           </a>
         </div>
 
-        <!-- ④ This period stats (scales with date filter) -->
-        <div class="dash-mh">
-          <span class="dash-mh-h" id="stats-period">This week</span>
-        </div>
-        <div class="dash-stats" id="dash-stats"></div>
-
-        <!-- ⑤ Tips for today — high-level cues from across the beat plan -->
-        <div class="dash-mh">
-          <span class="dash-mh-h">Tips for today</span>
-        </div>
-        <div class="dash-tip-card">
-          <div class="dash-tip-item">
-            <span class="dash-tip-ic">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 7 7 7 7 0 0 1-4 6.32V17H9v-1.68A7 7 0 0 1 5 9a7 7 0 0 1 7-7z"/></svg>
-            </span>
-            <span class="dash-tip-t"><strong>Lead with science.</strong> 4 of today's 6 doctors are P1 and prefer trial outcomes over commercial framing — keep the Phase-III talking points up front.</span>
-          </div>
-          <div class="dash-tip-item">
-            <span class="dash-tip-ic">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19V5a2 2 0 0 1 2-2h11l3 3v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM8 8h7M8 12h7M8 16h5"/></svg>
-            </span>
-            <span class="dash-tip-t"><strong>Evidence pack ready.</strong> Both oncologists (Dr. Sneha Rao, Dr. Lakshminarayanan Subramanian) asked for the CREDENCE Phase-III deck on last interactions — pre-load it before you walk in.</span>
-          </div>
-          <div class="dash-tip-item">
-            <span class="dash-tip-ic">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M6 14h12"/></svg>
-            </span>
-            <span class="dash-tip-t"><strong>Sample stock is tight.</strong> Only 2 boxes of <strong>RX-7821</strong> left for the day — reserve them for your highest-priority P1 drop, not the courtesy ones.</span>
-          </div>
-          <div class="dash-tip-item">
-            <span class="dash-tip-ic">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4M9 14l2 2 4-4"/></svg>
-            </span>
-            <span class="dash-tip-t"><strong>CME nudge window.</strong> KOL webinar on 25 Jun still has open seats — mention it to any doctor who's receptive after the main conversation.</span>
-          </div>
-        </div>
-
       </div></div>
     </div>
-  </div>
-
-  <!-- Date picker sheet -->
-  <div class="sheet-backdrop" id="dp-backdrop" onclick="closeSheet('dp')"></div>
-  <div class="bottom-sheet" id="dp-sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-header">
-      <span class="sheet-title">Select date range</span>
-      <button class="sheet-close" onclick="closeSheet('dp')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-    </div>
-    <div class="dp-quick">
-      <button class="dp-chip sel" onclick="quickRange(0,this)">Today</button>
-      <button class="dp-chip" onclick="quickRange(6,this)">Last 7 days</button>
-      <button class="dp-chip" onclick="quickRange(29,this)">Last 30 days</button>
-    </div>
-    <div class="dp-fields">
-      <div class="dp-field">
-        <div class="dp-field-label">From</div>
-        <div class="dp-date-wrap">
-          <span class="dp-date-display" id="dp-from-display">16 Jun 2026</span>
-          <input type="date" id="dp-from" value="2026-06-16" max="2026-06-16" onchange="syncDate('from')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-3)" stroke-width="2" style="pointer-events:none;flex:0 0 auto"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
-        </div>
-      </div>
-      <div class="dp-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--ink-3)" stroke-width="2"><path d="M5 12h14M14 6l6 6-6 6"/></svg></div>
-      <div class="dp-field">
-        <div class="dp-field-label">To</div>
-        <div class="dp-date-wrap">
-          <span class="dp-date-display" id="dp-to-display">16 Jun 2026</span>
-          <input type="date" id="dp-to" value="2026-06-16" max="2026-06-16" onchange="syncDate('to')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-3)" stroke-width="2" style="pointer-events:none;flex:0 0 auto"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
-        </div>
-      </div>
-    </div>
-    <button class="btn btn-primary" style="width:100%;padding:13px;font-size:var(--f-sub);" onclick="applyDateRange()">Apply</button>
   </div>
 </div>
 
@@ -172,57 +171,6 @@
 <script src="/assets/shell.js"></script>
 <script>
 initShell('dashboard');
-
-const dash={fromDate:new Date(2026,5,16),toDate:new Date(2026,5,16)};
-
-/* Icon-led stats — 4 tiles, single number each, no subtitles */
-const SVG_USERS='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.6"/><path d="M16 14.5a4.5 4.5 0 0 1 5 4"/></svg>';
-const SVG_SIGNAL='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
-const SVG_SAMPLE='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M6 14h12"/></svg>';
-const SVG_CHECK='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>';
-
-function getStats(f,t){
-  const d=Math.max(1,Math.round((t-f)/86400000)+1);
-  if(d===1) return {period:"Today",rows:[
-    {ic:SVG_USERS,v:"4/8",l:"P1 doctors met"},
-    {ic:SVG_SIGNAL,v:"83%",l:"Connect rate"},
-    {ic:SVG_SAMPLE,v:"3",l:"Samples dropped"},
-    {ic:SVG_CHECK,v:"5",l:"Pending tasks"},
-  ]};
-  if(d<=7) return {period:"This week",rows:[
-    {ic:SVG_USERS,v:"18/24",l:"P1 doctors met"},
-    {ic:SVG_SIGNAL,v:"79%",l:"Connect rate"},
-    {ic:SVG_SAMPLE,v:"22",l:"Samples dropped"},
-    {ic:SVG_CHECK,v:"9",l:"Pending tasks"},
-  ]};
-  return {period:"This month",rows:[
-    {ic:SVG_USERS,v:"68/96",l:"P1 doctors met"},
-    {ic:SVG_SIGNAL,v:"81%",l:"Connect rate"},
-    {ic:SVG_SAMPLE,v:"88",l:"Samples dropped"},
-    {ic:SVG_CHECK,v:"12",l:"Pending tasks"},
-  ]};
-}
-
-function renderStats(){
-  const s=getStats(dash.fromDate,dash.toDate);
-  document.getElementById('stats-period').textContent=s.period;
-  document.getElementById('dash-stats').innerHTML=s.rows.map(r=>`
-    <div class="dash-stat">
-      <span class="dash-stat-ic">${r.ic}</span>
-      <div class="dash-stat-body">
-        <div class="dash-stat-v">${r.v}</div>
-        <div class="dash-stat-l">${r.l}</div>
-      </div>
-    </div>`).join('');
-  document.getElementById('range-label').textContent=
-    (dash.fromDate.toDateString()===dash.toDate.toDateString())?'Today':rangeLabel(dash.fromDate,dash.toDate);
-}
-
-function syncDate(which){const inp=document.getElementById('dp-'+which);if(!inp.value) return;const [y,m,d]=inp.value.split('-').map(Number);const dt=new Date(y,m-1,d);if(which==='from') dash.fromDate=dt;else dash.toDate=dt;document.getElementById('dp-'+which+'-display').textContent=fmtDate(dt);document.querySelectorAll('.dp-chip').forEach(c=>c.classList.remove('sel'));}
-function quickRange(days,el){const to=new Date(2026,5,16),from=new Date(to);from.setDate(to.getDate()-days);dash.fromDate=from;dash.toDate=to;document.getElementById('dp-from').value=fmtDateISO(from);document.getElementById('dp-to').value=fmtDateISO(to);document.getElementById('dp-from-display').textContent=fmtDate(from);document.getElementById('dp-to-display').textContent=fmtDate(to);document.querySelectorAll('.dp-chip').forEach(c=>c.classList.remove('sel'));if(el) el.classList.add('sel');}
-function applyDateRange(){if(dash.fromDate>dash.toDate){snack('"From" must be on or before "To".');return;}closeSheet('dp');renderStats();}
-
-renderStats();
 </script>
 </body>
 </html>
